@@ -1,6 +1,0 @@
-services:
-  webapi:
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-    ports:
-      - "8080:8080"
