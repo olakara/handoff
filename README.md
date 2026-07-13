@@ -7,6 +7,21 @@ to orchestrate and observe multiple coding agents working together.
 
 ## Status
 
-This repository was recently reset to a clean slate. There is no application
-code here yet — scaffolding is pending. This README will be expanded as the
-project takes shape.
+A minimal Go web application has been scaffolded: it serves a "Hello World"
+page on port 8080.
+
+## Running the app
+
+```bash
+go run .
+```
+
+The server listens on port 8080 by default (override with the `PORT`
+environment variable), and serves a page with an `<h1>Hello World</h1>`
+heading and a purple "Welcome to Go handoff!" message.
+
+## Testing
+
+```bash
+go test ./...
+```

@@ -480,3 +480,14 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+/handoff
+
