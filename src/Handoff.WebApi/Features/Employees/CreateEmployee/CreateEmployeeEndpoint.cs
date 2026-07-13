@@ -17,7 +17,14 @@ public static class CreateEmployeeEndpoint
             try
             {
                 var employee = CreateEmployeeHandler.Handle(command, repository);
-                return Results.Created($"/employees/{employee.Id}", employee);
+                var response = new EmployeeCreatedResponse(
+                    employee.Id,
+                    employee.FullName,
+                    employee.Email.Value,
+                    employee.Department,
+                    employee.HireDate,
+                    employee.EmploymentType.Name);
+                return Results.Created($"/employees/{employee.Id}", response);
             }
             catch (ArgumentException ex)
             {
