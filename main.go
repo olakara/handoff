@@ -24,8 +24,13 @@ const indexHTMLTemplate = `<!DOCTYPE html>
 `
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	name := r.URL.Query().Get("name")
+	if name == "" {
+		name = "World"
+	}
+
 	var hello bytes.Buffer
-	if err := component.Hello().Render(r.Context(), &hello); err != nil {
+	if err := component.Hello(name).Render(r.Context(), &hello); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
