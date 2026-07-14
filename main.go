@@ -1,28 +1,37 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/olakara/handoff/component"
 )
 
-const indexHTML = `<!DOCTYPE html>
+const indexHTMLTemplate = `<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Handoff</title>
 </head>
 <body>
-	<h1>Hello World</h1>
+	%s
 	<p style="color: purple;">Welcome to Go handoff!</p>
 </body>
 </html>
 `
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	var hello bytes.Buffer
+	if err := component.Hello().Render(r.Context(), &hello); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	fmt.Fprint(w, indexHTML)
+	fmt.Fprintf(w, indexHTMLTemplate, hello.String())
 }
 
 func main() {
